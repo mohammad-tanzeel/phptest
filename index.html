@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    </head>
+    <body>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>status</th>
+                <th>created</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+               <th>title</th>
+                <th>status</th>
+                <th>created</th>
+                <th>Action</th>
+            </tr>
+        </tfoot>
+    </table>
+        <script>
+            $(document).ready(function() {
+    $('#example').DataTable( {
+        "ajax": "data/getblog.php",
+        "columns": [
+            { "data": "title" },
+            { "data": "status" },
+            { "data": "created_at" }
+        ],
+        
+        "columnDefs": [
+                    {
+                        "targets": 3,
+                        orderable: false,
+                        "render": function(data, type, row, meta){
+                            return '<a href="blog/' + row['id'] + '/edit">Edit</a> | <a href="blog/' + row['id'] + '/delete">Delete</a>';
+                        }
+                    }
+                ]
+    } );
+} );
+        </script>
+    </body>
+</html>
